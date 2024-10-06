@@ -1,0 +1,2 @@
+# JHipsterCodeTest
+JHipsterCodeTest
