@@ -1,0 +1,53 @@
+
+
+
+entity SysDept {  
+    deptName String required,      
+    deptCode String required unique,  
+    parentDeptId Long  
+}  
+  
+entity SysMenu {  
+    menuName String required,  
+    menuUrl String,  
+    parentId Long,  
+    menuIcon String,  
+    menuOrder Integer  
+}  
+  
+entity SysRole {  
+    roleName String required unique,  
+    description String  
+}  
+  
+entity SysUser {  
+    username String required unique,  
+    password String required,  
+    firstName String required,  
+    lastName String required,  
+    email String required unique,  
+    activated Boolean required ,  
+    imageUrl String,  
+    deptId Long  
+}  
+  
+relationship OneToMany {  
+    SysDept{subDepts} to SysDept{parentDept(parentDeptId)}  
+}  
+  
+relationship OneToMany {  
+    SysMenu{subMenus} to SysMenu{parent(parentId)}  
+}  
+  
+relationship ManyToMany {  
+    SysRole{users} to SysUser{roles}  
+}  
+  
+relationship ManyToMany {  
+    SysRole{menus} to SysMenu{roles}  
+}  
+  
+relationship ManyToOne {  
+    SysUser{department} to SysDept{users}  
+}  
+  
